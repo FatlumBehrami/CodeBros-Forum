@@ -1,0 +1,67 @@
+﻿@model CodeBrosForum.Models.Posts.PostIndexModel
+
+<div class="container body-content">
+    <div class="d-flex column post-heading mb-3 col-md-12">
+        <span class="col-md-10 h2 card m-2 p-2 text-white bg-dark">
+            @Model.Title
+        </span>
+        <span class="heading-btn col-md-2"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-primary">Back to @Model.ForumName</a></span>
+    </div>
+    <div class="row">
+        <div class="card col-md-3">
+            <div class="post-author-image" style="background-image: url(@Model.AuthorImageUrl);"></div>
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">@Model.AuthorName</a>
+            <span class="post-date">@Model.Created</span>
+            @if (Model.IsAuthorAdmin)
+            {
+                <span class="is-admin smaller">Admin</span>
+            }
+        </div>
+        <div class="card col-md-9">
+            <div class="post-content">
+                @Model.PostContent
+            </div>
+        </div>
+    </div>
+    <div class="row reply-divider"></div>
+    @if (Model.Replies.Any())
+    {
+        @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <span><a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-success">Post Reply</a></span>
+        </div>
+    }
+        foreach (var reply in Model.Replies)
+        {
+            <div class='row reply-content'>
+                <div class="card col-md-3">
+                    <div class="post-author-image" style="background-image: url(@reply.AuthorImageUrl)"></div>
+                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
+                        @reply.AuthorName
+                    </a>
+                    @if (reply.IsAuthorAdmin)
+                    {
+                        <div class="is-admin smaller">Admin</div>
+                        <br />
+                    }
+                    <span>@reply.Created.ToLongDateString()</span>            
+                </div>
+                <div class="card col-md-9">
+                    <div class="post-content">
+                        @reply.ReplyContent
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="no-posts">
+            <h3 class="h3 text-center">No replies to this post</h3>
+             <div class="row text-center d-flex flex-column-reverse">
+            <span><a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-success">Post Reply</a></span>
+        </div>
+        </div>
+    }
+</div>

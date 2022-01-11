@@ -1,0 +1,73 @@
+﻿.jumbotron {
+    background: url("../images/frontSplash.jpg");
+    background-size: cover;
+    height: 500px;
+}
+
+.forum-logo {
+    height: 32px;
+    width: 32px;
+    background-size: 100%;
+}
+
+@media-desktop {
+    .jumbotron {
+        height: 70vh;
+        transform: translateY(-200px);
+    }
+}
+
+.home-search-bar {
+    width: 70%;
+    margin: 10px;
+    text-align: center;
+    font-family: Ubuntu;
+}
+.home-search-bar form {
+    width: 90%;
+}
+
+.home-search-bar input {
+    font-family: "Ubuntu Mono";
+}
+
+.front-header {
+    font-family: Ubuntu, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.front-subheader {
+    font-family: "Ubuntu Mono", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.latest-posts-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.post-date p {
+    margin: 0;
+    font-weight: bold;
+    font-family: "Ubuntu Mono";
+    font-size: 0.8em;
+}
+
+.latest-posts-data div:first-child {
+    display: flex;
+    flex-direction: row;
+}
+
+.latest-posts{
+    font-family: "Ubuntu";
+    font-size: 1.2em;
+    color: #333;
+    margin: 4px 0 16px 0;
+}
+.latest-posts-heading {
+    font-size: 1.7rem;
+}
+
+.post-subtitle{
+    font-family: "Ubuntu Mono";
+    font-size: 0.8em;
+}

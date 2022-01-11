@@ -1,0 +1,63 @@
+﻿@model CodeBrosForum.Models.Search.SearchResultModel
+
+<div class="container body-content">
+    <div class="row">
+        <div class="">
+            <span id="results">Search Results for: @Model.SearchQuery</span>
+        </div>
+    </div>
+    <div class="row">
+        @if (!Model.EmptySearchResults)
+        {
+            <table class="table table-hover table-bordered">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="forum-logo" style="background-image: url(@post.Forum.ImageUrl);"></div>
+                            </td>
+                            <td>
+                                <div>
+                                    <div>
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div>
+                                        by:
+                                        <span>
+                                            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">
+                                                @post.AuthorName
+                                            </a>
+                                            (@post.AuthorRating)
+                                        </span>
+                                        in:
+                                        <span>
+                                            <a asp-controller="Forum" asp-action="Topic" asp-route-id="@post.Forum.Id">@post.Forum.Name</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    Replies: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div>@post.DatePosted</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="noPosts">
+                <i class="material-icons md-72">question_answer</i>
+                <h3>
+                    No search results found for @Model.SearchQuery <br />
+                </h3>
+            </div>
+        }
+    </div>
+</div>

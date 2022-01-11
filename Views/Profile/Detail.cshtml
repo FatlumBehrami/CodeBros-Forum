@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model CodeBrosForum.Models.ApplicationUser.ProfileModel
+@using CodeBrosForum.Data.Models
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="container bady-content">
+	<div class="row">
+		<h2 class="h2">
+			User Profile
+		</h2>
+	</div>
+	<div class="row">
+		<div>
+			<div style="background-image: url(@Model.ProfileImageUrl)"></div>
+			<div>
+				@if (Model.IsAdmin)
+				{
+					<span class="isAdmin">Admin</span>
+				}
+				<span class="userRating">Rating: @Model.UserRating</span>
+				<span class="userEmailLabel">Email: @Model.Email</span>
+				<span class="userCreatedLabel">Member: @Model.MemberSince</span>
+			</div>
+		</div>
+	</div>
+</div>
+

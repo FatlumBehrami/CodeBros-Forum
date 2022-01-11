@@ -1,0 +1,53 @@
+﻿@model CodeBrosForum.Models.ApplicationUser.ProfileListModel
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>All Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Username
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Member since
+            </th>
+            <th>
+                Rating
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Profiles) 
+{ 
+        <tr>
+            <td>
+                <div style="background-image: url(@item.ProfileImageUrl); height: 100px; width: 100px; background-size: 100%;"></div>
+            </td>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.MemberSince
+            </td>
+            <td>
+                @item.UserRating
+            </td>
+            <td>
+                <a asp-controller="Profile" asp-action="Detail" asp-route-id="@item.UserId" class="btn btn-primary">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

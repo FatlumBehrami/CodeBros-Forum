@@ -1,0 +1,59 @@
+﻿@model CodeBrosForum.Models.Home.HomeIndexModel
+
+
+<link href="~/css/front-page.css" rel="stylesheet" />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="jumbotron col-md-12">
+            <h1 class="display-4 text-white front-header">CodeBros Forum</h1>
+            <p class="lead text-white front-subheader">Riinvest College's coding forum</p>
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="card-header latest-posts-heading">Latest Posts</h3>
+        <table class="table table-hover latest-posts">
+            <tbody>
+                @foreach (var post in Model.LatestPosts)
+                {
+                    <tr>
+                        <td>
+                            <div class="latest-posts-data">
+                                <div>
+                                    <div class="forum-logo" style="background-image: url(@post.Forum.ImageUrl);"></div>
+                                    <div class="post-title">
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                            @post.Title
+                                        </a>
+                                        <div class="post-subtitle">
+                                            @if (post.RepliesCount == 1)
+                                            {
+                                                <span>@post.RepliesCount Reply</span>
+                                            }
+                                            else if (post.RepliesCount == 0)
+                                            {
+                                                <span>No replies</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@post.RepliesCount Replies</span>
+                                            }
+                                            <span class="post-user">
+                                                <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-date">
+                                    <p>@post.DatePosted.ToShortDateString()</p>
+                                    <p>@post.DatePosted.ToShortTimeString()</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@model CodeBrosForum.Models.Forum.ForumIndexModel
+
+<h1>Forums</h1>
+
+<table class="table table-hover" id="forum-index-table">
+    <tbody>
+        @foreach (var forum in Model.ForumList)
+            {
+                <tr>
+                    <td>
+                        <div class="forum-logo" style="background-image: url(@forum.ImageUrl);">
+                        </div>
+                    </td>
+                    <td>
+                        <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">
+                            @forum.Name
+                        </a>
+                    </td>
+                    <td>
+                        @forum.Description
+                    </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-controller="Forum" asp-action="Edit" asp-route-id="@forum.Id" class="btn btn-success">Edit</a> | 
+                        <a asp-controller="Forum" asp-action="Delete" asp-route-id="@forum.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                }
+            </tr>
+            }
+    </tbody>
+</table>
